@@ -1,5 +1,6 @@
 var express = require('express'),
     employees = require('./routes/employees'),
+    categories = require('./routes/categories'),
     app = express();
 
 app.use(express.static('www'));
@@ -10,9 +11,9 @@ app.all('*', function(req, res, next) {
     res.header("Access-Control-Allow-Headers", "X-Requested-With");
     next();
 });
-
+app.get('/categories', categories.getCategories);
 app.get('/employees', employees.findAll);
-app.get('/employees/:id', employees.findById);
+app.get('/businessPage/:id', employees.findById);
 
 app.set('port', process.env.PORT || 5000);
 

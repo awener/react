@@ -1,8 +1,10 @@
 var Header = React.createClass({
     render: function () {
+        var path = this.props.path ? '#business/'+this.props.path : '#';
+      
         return (
             <header className="bar bar-nav">
-                <a href="#" className={"icon icon-left-nav pull-left" + (this.props.back==="true"?"":" hidden")}></a>
+                <a href={path} className={"icon icon-left-nav pull-left" + (this.props.back==="true"?"":" hidden")}></a>
                 <h1 className="title">{this.props.text}</h1>
             </header>
         );
@@ -11,7 +13,7 @@ var Header = React.createClass({
 
 var SearchBar = React.createClass({
     searchHandler: function() {
-        this.props.searchHandler(this.refs.searchKey.getDOMNode().value);
+        this.props.searchHandler(this.refs.searchKey.getDOMNode().value, this.props.category);
     },
     render: function () {
         return (
@@ -26,13 +28,37 @@ var SearchBar = React.createClass({
 var EmployeeListItem = React.createClass({
     render: function () {
         return (
-            <li className="table-view-cell media">
-                <a href={"#employees/" + this.props.employee.id}>
+          
+        <li  className={"page " + this.props.position}  className="table-view-cell media">
+            <Container fluid={true}>
+             <Row>
+                <Column extraSmall={ 6 }
+                    small={ 6 }
+                    medium={ 6 }
+                    large={ 6 }
+                    largeOffset={ 6 } > 
+                    <a   href={"#businessPage/" + this.props.employee.id}>
+                     
                     <img className="media-object small pull-left" src={"pics/" + this.props.employee.firstName + "_" + this.props.employee.lastName + ".jpg" }/>
-                    {this.props.employee.firstName} {this.props.employee.lastName}
-                    <p>{this.props.employee.title}</p>
-                </a>
-            </li>
+                    <b>{this.props.employee.firstName} {this.props.employee.lastName}</b>
+                    <p>{this.props.employee.address}</p>
+                                       
+                    </a> 
+                </Column>
+
+                <Column extraSmall={ 6 }
+                    small={ 6 }
+                    medium={ 6 }
+                    large={ 6 }
+                    largeOffset={ 6 } > 
+                    <a  href={"tel:" + this.props.employee.mobilePhone} ><img  className="media-object small pull-right"  src="pics/phone.png" />
+                    </a>
+                </Column>
+             
+            </Row>
+        </Container>
+        </li>
+       
         );
     }
 });
@@ -52,17 +78,53 @@ var EmployeeList = React.createClass({
     }
 });
 
+
 var HomePage = React.createClass({
+     getInitialState: function() {
+        return {categories: []};
+    },
+    componentDidMount: function() {
+        employeeService.getCategories().done(function(result) {
+            this.setState({categories: result});
+        }.bind(this));
+    },
     render: function () {
+
+
         return (
-            <div className={"page " + this.props.position}>
-                <Header text="Employee Directory" back="false"/>
-                <SearchBar searchKey={this.props.searchKey} searchHandler={this.props.searchHandler}/>
-                <div className="content">
-                    <EmployeeList employees={this.props.employees}/>
-                </div>
-            </div>
-        );
+<div className={"page " + this.props.position}>
+<Header text="Title" back="false"/>
+    <div className="content">
+        <Container fluid={true}>
+            <Row>
+                {this.state.categories.map(function(categories) {
+                    return (
+                      <Column extraSmall={ 6 }
+                        small={ 6 }
+                        medium={ 6 }
+                        large={ 6 }
+                        largeOffset={ 6 } >
+                   <div key={categories.id} className="categories  media">
+                   <a  className='grid-left' href={"#business/" + categories.name} style={{display: 'inline-block'}} >
+                    <img className="media-object big pull-left " src={"pics/" + categories.img}/> 
+                    <p style={{'textAlign': 'center'}}>{categories.name} </p>
+                   </a>
+                   </div>
+                     </Column>
+
+                
+                    )
+                })}
+            </Row>
+        </Container>
+       
+ 
+    </div>
+
+
+</div>
+
+        );  
     }
 });
 
@@ -73,83 +135,102 @@ var EmployeePage = React.createClass({
     componentDidMount: function() {
         this.props.service.findById(this.props.employeeId).done(function(result) {
             this.setState({employee: result});
+
+
         }.bind(this));
+       
+    
+  
     },
+
     render: function () {
+     
+     
         return (
             <div className={"page " + this.props.position}>
-                <Header text="Employee" back="true"/>
+                <Header back="true" path={this.state.employee.category}/>
                 <div className="card">
                     <ul className="table-view">
                         <li className="table-view-cell media">
                             <img className="media-object big pull-left" src={"pics/" + this.state.employee.firstName + "_" + this.state.employee.lastName + ".jpg" }/>
                             <h1>{this.state.employee.firstName} {this.state.employee.lastName}</h1>
-                            <p>{this.state.employee.title}</p>
+                            <p>{this.state.employee.address}</p>
                         </li>
                         <li className="table-view-cell media">
                             <a href={"tel:" + this.state.employee.officePhone} className="push-right">
                                 <span className="media-object pull-left icon icon-call"></span>
                                 <div className="media-body">
-                                Call Office
+                                Call
                                     <p>{this.state.employee.officePhone}</p>
                                 </div>
                             </a>
                         </li>
-                        <li className="table-view-cell media">
-                            <a href={"tel:" + this.state.employee.mobilePhone} className="push-right">
+                         <li className="table-view-cell media">
+                            <a target="_blank" href={this.state.employee.website} className="push-right">
                                 <span className="media-object pull-left icon icon-call"></span>
                                 <div className="media-body">
-                                Call Mobile
-                                    <p>{this.state.employee.mobilePhone}</p>
+                                Website
+                                    <p>{this.state.employee.website}</p>
                                 </div>
                             </a>
                         </li>
-                        <li className="table-view-cell media">
-                            <a href={"sms:" + this.state.employee.mobilePhone} className="push-right">
-                                <span className="media-object pull-left icon icon-sms"></span>
-                                <div className="media-body">
-                                SMS
-                                    <p>{this.state.employee.mobilePhone}</p>
-                                </div>
-                            </a>
+                        <li className="table-view-cell">
+                            
+                        <iframe className="gmapStyle" src={"https://google.com/maps/embed/v1/place?q="+ this.state.employee.coordinates + "&zoom=17&key=AIzaSyATVILoS8l9ARp2SS2wOViA8xUp2tAMx4A"}></iframe>
+
                         </li>
-                        <li className="table-view-cell media">
-                            <a href={"mailto:" + this.state.employee.email} className="push-right">
-                                <span className="media-object pull-left icon icon-email"></span>
-                                <div className="media-body">
-                                Email
-                                    <p>{this.state.employee.email}</p>
-                                </div>
-                            </a>
-                        </li>
+
+                         <li className="table-view-cell media"></li>
+                        
+                       
+                       
                     </ul>
                 </div>
             </div>
         );
     }
 });
+var BusinessList =  React.createClass({
+    render: function () {
+       
+        return (
+            <div className={"page " + this.props.position}>
+                <Header text={this.props.category} back="true"/>
+                <SearchBar searchKey={this.props.searchKey} category={this.props.category} searchHandler={this.props.searchHandler}/>
+                <div className="content">
+                    <EmployeeList employees={this.props.employees}/>
+                </div>
+            </div>
 
+        );
+    }
+});
 var App = React.createClass({
     mixins: [PageSlider],
     getInitialState: function() {
         return {
             searchKey: '',
             employees: []
+           
         }
     },
-    searchHandler: function(searchKey) {
-        employeeService.findByName(searchKey).done(function(employees) {
+    searchHandler: function(searchKey, category) {
+        employeeService.findByName(searchKey, category).done(function(employees) {
             this.setState({
                 searchKey:searchKey,
                 employees: employees,
-                pages: [<HomePage key="list" searchHandler={this.searchHandler} searchKey={searchKey} employees={employees}/>]});
+                pages: [<BusinessList key="listing" searchHandler={this.searchHandler} searchKey={searchKey} employees={employees} category={category}/>]});
         }.bind(this));
     },
     componentDidMount: function() {
         router.addRoute('', function() {
-            this.slidePage(<HomePage key="list" searchHandler={this.searchHandler} searchKey={this.state.searchKey} employees={this.state.employees}/>);
+            this.slidePage(<HomePage key="list" />);
         }.bind(this));
-        router.addRoute('employees/:id', function(id) {
+
+        router.addRoute('business/:category', function(category) {
+            this.slidePage(<BusinessList key="listing" searchHandler={this.searchHandler} searchKey={this.state.searchKey} employees={this.state.employees} category={category}/>);
+        }.bind(this));
+        router.addRoute('businessPage/:id', function(id) {
             this.slidePage(<EmployeePage key="details" employeeId={id} service={employeeService}/>);
         }.bind(this));
         router.start();

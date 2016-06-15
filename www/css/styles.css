@@ -32,3 +32,17 @@ input[type=search] {
 .card {
     margin-top:54px;
 }
+
+
+.grid-left {
+    margin-left: 10% !important;
+}
+
+.gmapStyle {
+
+    border: none;
+    width: 300px;
+    height: 300px;
+    margin-bottom: 100px;
+
+}
