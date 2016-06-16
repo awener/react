@@ -12,6 +12,9 @@ employeeService = (function () {
         },
         getCategories: function() {
             return $.ajax(baseURL + "/categories");
+        },
+        findAll: function(category) {
+            return $.ajax({url: baseURL + '/employees', data: { category: category}});
         }
     };
 

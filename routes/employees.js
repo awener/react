@@ -19,15 +19,19 @@ exports.findAll = function (req, res, next) {
   
     var name = req.query.name;
     var category = req.query.category;
-    if (name) {
+  
         res.send(employees.filter(function(employee) {
-            if(employee.category == category) {
-            return (employee.firstName + ' ' + employee.lastName).toLowerCase().indexOf(name.toLowerCase()) > -1;
-            } else return;
+            if(employee.category == category) { 
+
+                if(name) {
+                    return (employee.firstName + ' ' + employee.lastName).indexOf(name) > -1;
+                } else  return true; 
+            }
+            else return false;
+
+           
         }));
-    } else {
-        res.send(employees);
-    }
+
 };
 
 exports.findById = function (req, res, next) {

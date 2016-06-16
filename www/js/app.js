@@ -4,7 +4,7 @@ var Header = React.createClass({
       
         return (
             <header className="bar bar-nav">
-                <a href={path} className={"icon icon-left-nav pull-left" + (this.props.back==="true"?"":" hidden")}></a>
+                <a href={path} className={"icon icon-left-nav pull-left no-decoration" + (this.props.back==="true"?"":" hidden")}></a>
                 <h1 className="title">{this.props.text}</h1>
             </header>
         );
@@ -26,17 +26,18 @@ var SearchBar = React.createClass({
 });
 
 var EmployeeListItem = React.createClass({
+
     render: function () {
         return (
           
         <li  className={"page " + this.props.position}  className="table-view-cell media">
             <Container fluid={true}>
              <Row>
-                <Column extraSmall={ 6 }
-                    small={ 6 }
-                    medium={ 6 }
-                    large={ 6 }
-                    largeOffset={ 6 } > 
+                <Column extraSmall={ 10 }
+                    small={ 10 }
+                    medium={ 10 }
+                    large={ 10 }
+                    largeOffset={ 10 } > 
                     <a   href={"#businessPage/" + this.props.employee.id}>
                      
                     <img className="media-object small pull-left" src={"pics/" + this.props.employee.firstName + "_" + this.props.employee.lastName + ".jpg" }/>
@@ -46,12 +47,12 @@ var EmployeeListItem = React.createClass({
                     </a> 
                 </Column>
 
-                <Column extraSmall={ 6 }
-                    small={ 6 }
-                    medium={ 6 }
-                    large={ 6 }
-                    largeOffset={ 6 } > 
-                    <a  href={"tel:" + this.props.employee.mobilePhone} ><img  className="media-object small pull-right"  src="pics/phone.png" />
+                <Column extraSmall={ 2 }
+                    small={ 2 }
+                    medium={ 2 }
+                    large={ 2 }
+                    largeOffset={ 2 } > 
+                    <a  href={"tel:" + this.props.employee.mobilePhone} ><img  className="media-object small fixPush"  src="pics/phone.png" />
                     </a>
                 </Column>
              
@@ -95,28 +96,22 @@ var HomePage = React.createClass({
 <div className={"page " + this.props.position}>
 <Header text="Title" back="false"/>
     <div className="content">
-        <Container fluid={true}>
-            <Row>
+        
                 {this.state.categories.map(function(categories) {
                     return (
-                      <Column extraSmall={ 6 }
-                        small={ 6 }
-                        medium={ 6 }
-                        large={ 6 }
-                        largeOffset={ 6 } >
-                   <div key={categories.id} className="categories  media">
-                   <a  className='grid-left' href={"#business/" + categories.name} style={{display: 'inline-block'}} >
+                      
+                  
+                   <a className='col-xs-4 col-sm-6 col-md-3 col-lg-4 grid-left'   href={"#business/" + categories.name}>
                     <img className="media-object big pull-left " src={"pics/" + categories.img}/> 
-                    <p style={{'textAlign': 'center'}}>{categories.name} </p>
+                    <p className='col-md-10' style={{'textAlign': 'center'}}>{categories.name} </p>
                    </a>
-                   </div>
-                     </Column>
+                  
+                     
 
                 
                     )
                 })}
-            </Row>
-        </Container>
+           
        
  
     </div>
@@ -149,17 +144,17 @@ var EmployeePage = React.createClass({
         return (
             <div className={"page " + this.props.position}>
                 <Header back="true" path={this.state.employee.category}/>
-                <div className="card">
+                <div className="content">
                     <ul className="table-view">
                         <li className="table-view-cell media">
                             <img className="media-object big pull-left" src={"pics/" + this.state.employee.firstName + "_" + this.state.employee.lastName + ".jpg" }/>
-                            <h1>{this.state.employee.firstName} {this.state.employee.lastName}</h1>
+                            <h1 className='fixedSize'>{this.state.employee.firstName} {this.state.employee.lastName}</h1>
                             <p>{this.state.employee.address}</p>
                         </li>
                         <li className="table-view-cell media">
                             <a href={"tel:" + this.state.employee.officePhone} className="push-right">
                                 <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body">
+                                <div className="media-body fixedSize">
                                 Call
                                     <p>{this.state.employee.officePhone}</p>
                                 </div>
@@ -168,19 +163,26 @@ var EmployeePage = React.createClass({
                          <li className="table-view-cell media">
                             <a target="_blank" href={this.state.employee.website} className="push-right">
                                 <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body">
+                                <div className="media-body fixedSize">
                                 Website
                                     <p>{this.state.employee.website}</p>
                                 </div>
                             </a>
                         </li>
-                        <li className="table-view-cell">
+                        
+
+                           <li className="table-view-cell">
                             
-                        <iframe className="gmapStyle" src={"https://google.com/maps/embed/v1/place?q="+ this.state.employee.coordinates + "&zoom=17&key=AIzaSyATVILoS8l9ARp2SS2wOViA8xUp2tAMx4A"}></iframe>
+                        <iframe className="gmapStyle col-xs-12" src={"https://google.com/maps/embed/v1/place?q="+ this.state.employee.coordinates + "&zoom=17&key=AIzaSyATVILoS8l9ARp2SS2wOViA8xUp2tAMx4A"}></iframe>
 
                         </li>
+                        
 
-                         <li className="table-view-cell media"></li>
+
+
+                       
+
+
                         
                        
                        
@@ -191,13 +193,20 @@ var EmployeePage = React.createClass({
     }
 });
 var BusinessList =  React.createClass({
+
+    componentDidMount: function() {
+        // do the initial search
+        this.props.searchHandler(' ', this.props.category);
+    },
+    
     render: function () {
-       
+        
         return (
             <div className={"page " + this.props.position}>
                 <Header text={this.props.category} back="true"/>
                 <SearchBar searchKey={this.props.searchKey} category={this.props.category} searchHandler={this.props.searchHandler}/>
                 <div className="content">
+               
                     <EmployeeList employees={this.props.employees}/>
                 </div>
             </div>
