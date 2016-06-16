@@ -12,7 +12,7 @@ app.all('*', function(req, res, next) {
     next();
 });
 app.get('/categories', categories.getCategories);
-app.get('/employees', employees.findAll);
+app.get('/business', employees.findAll);
 app.get('/businessPage/:id', employees.findById);
 
 app.set('port', process.env.PORT || 5000);

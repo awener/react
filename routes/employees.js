@@ -16,7 +16,7 @@ var employees = [
 
 
 exports.findAll = function (req, res, next) {
-  
+   
     var name = req.query.name;
     var category = req.query.category;
   

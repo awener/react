@@ -8,13 +8,13 @@ employeeService = (function () {
             return $.ajax(baseURL + "/businessPage/" + id);
         },
         findByName: function(searchKey, category) {
-            return $.ajax({url: baseURL + "/employees", data: {name: searchKey, category: category}});
+            return $.ajax({url: baseURL + "/business" , data: {name: searchKey, category: category}});
         },
         getCategories: function() {
             return $.ajax(baseURL + "/categories");
         },
         findAll: function(category) {
-            return $.ajax({url: baseURL + '/employees', data: { category: category}});
+            return $.ajax({url: baseURL + '/business', data: { name: ' ', category: category}});
         }
     };
 

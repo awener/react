@@ -84,6 +84,7 @@ var HomePage = React.createClass({
      getInitialState: function() {
         return {categories: []};
     },
+   
     componentDidMount: function() {
         employeeService.getCategories().done(function(result) {
             this.setState({categories: result});
@@ -101,7 +102,7 @@ var HomePage = React.createClass({
                     return (
                       
                   
-                   <a className='col-xs-4 col-sm-6 col-md-3 col-lg-4 grid-left'   href={"#business/" + categories.name}>
+                   <a className='col-xs-4 col-sm-6 col-md-3 col-lg-4 grid-left'   href={"#business/" + categories.name} >
                     <img className="media-object big pull-left " src={"pics/" + categories.img}/> 
                     <p className='col-md-10' style={{'textAlign': 'center'}}>{categories.name} </p>
                    </a>
@@ -193,12 +194,8 @@ var EmployeePage = React.createClass({
     }
 });
 var BusinessList =  React.createClass({
-
-    componentDidMount: function() {
-        // do the initial search
-        this.props.searchHandler(' ', this.props.category);
-    },
-    
+   
+   
     render: function () {
         
         return (
@@ -237,6 +234,7 @@ var App = React.createClass({
         }.bind(this));
 
         router.addRoute('business/:category', function(category) {
+            this.searchHandler(' ', category);
             this.slidePage(<BusinessList key="listing" searchHandler={this.searchHandler} searchKey={this.state.searchKey} employees={this.state.employees} category={category}/>);
         }.bind(this));
         router.addRoute('businessPage/:id', function(id) {
