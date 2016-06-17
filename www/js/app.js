@@ -40,8 +40,8 @@ var EmployeeListItem = React.createClass({
                     largeOffset={ 10 } > 
                     <a   href={"#businessPage/" + this.props.employee.id}>
                      
-                    <img className="media-object small pull-left" src={"pics/" + this.props.employee.firstName + "_" + this.props.employee.lastName + ".jpg" }/>
-                    <b>{this.props.employee.firstName} {this.props.employee.lastName}</b>
+                    <img className="media-object small pull-left" src={"pics/" + this.props.employee.Name + ".jpg" }/>
+                    <b>{this.props.employee.Name}</b>
                     <p>{this.props.employee.address}</p>
                                        
                     </a> 
@@ -148,8 +148,8 @@ var EmployeePage = React.createClass({
                 <div className="content">
                     <ul className="table-view">
                         <li className="table-view-cell media">
-                            <img className="media-object big pull-left" src={"pics/" + this.state.employee.firstName + "_" + this.state.employee.lastName + ".jpg" }/>
-                            <h1 className='fixedSize'>{this.state.employee.firstName} {this.state.employee.lastName}</h1>
+                            <img className="media-object big pull-left" src={"pics/" + this.state.employee.Name + ".jpg" }/>
+                            <h1 className='fixedSize'>{this.state.employee.Name}</h1>
                             <p>{this.state.employee.address}</p>
                         </li>
                         <li className="table-view-cell media">
@@ -234,7 +234,7 @@ var App = React.createClass({
         }.bind(this));
 
         router.addRoute('business/:category', function(category) {
-            this.searchHandler(' ', category);
+            this.searchHandler('', category);
             this.slidePage(<BusinessList key="listing" searchHandler={this.searchHandler} searchKey={this.state.searchKey} employees={this.state.employees} category={category}/>);
         }.bind(this));
         router.addRoute('businessPage/:id', function(id) {
