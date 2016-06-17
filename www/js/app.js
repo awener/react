@@ -149,14 +149,14 @@ var EmployeePage = React.createClass({
         return (
             <div className={"page " + this.props.position}>
                 <Header back="true" path={this.state.employee.category}/>
-                <div className="content">
-                    <ul className="table-view">
-                        <li className="table-view-cell media">
+                <div className="content table-view">
+                   
+                        <div className="table-view-cell media">
                             <img className="media-object big pull-left" src={"pics/" + this.state.employee.Name + ".jpg" }/>
                             <h1 className='fixedSize'>{this.state.employee.Name}</h1>
                             <p>{this.state.employee.address}</p>
-                        </li>
-                        <li className="table-view-cell media">
+                        </div>
+                        <div className="table-view-cell media">
                             <a href={"tel:" + this.state.employee.officePhone} className="push-right">
                                 <span className="media-object pull-left icon icon-call"></span>
                                 <div className="media-body fixedSize">
@@ -164,23 +164,117 @@ var EmployeePage = React.createClass({
                                     <p>{this.state.employee.officePhone}</p>
                                 </div>
                             </a>
-                        </li>
-                         <li className="table-view-cell media">
-                            <a target="_blank" href={this.state.employee.website} className="push-right">
+                        </div>
+
+
+
+
+                        <div className="table-view-cell media">
+                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
                                 <span className="media-object pull-left icon icon-call"></span>
                                 <div className="media-body fixedSize">
-                                Website
-                                    <p>{this.state.employee.website}</p>
+                                Call
+                                    <p>{this.state.employee.officePhone}</p>
                                 </div>
                             </a>
-                        </li>
+                        </div>
+                        <div className="table-view-cell media">
+                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Call
+                                    <p>{this.state.employee.officePhone}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="table-view-cell media">
+                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Call
+                                    <p>{this.state.employee.officePhone}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="table-view-cell media">
+                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Call
+                                    <p>{this.state.employee.officePhone}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="table-view-cell media">
+                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Call
+                                    <p>{this.state.employee.officePhone}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="table-view-cell media">
+                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Call
+                                    <p>{this.state.employee.officePhone}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="table-view-cell media">
+                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Call
+                                    <p>{this.state.employee.officePhone}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="table-view-cell media">
+                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Call
+                                    <p>{this.state.employee.officePhone}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="table-view-cell media">
+                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Call
+                                    <p>{this.state.employee.officePhone}</p>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="table-view-cell media">
+                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Call
+                                    <p>{this.state.employee.officePhone}</p>
+                                </div>
+                            </a>
+                        </div>
 
 
 
 
 
 
-                        <li className="table-view-cell media">
+
+
+
+
+
+
+
+
+
+                         <div className="table-view-cell media">
                             <a target="_blank" href={this.state.employee.website} className="push-right">
                                 <span className="media-object pull-left icon icon-call"></span>
                                 <div className="media-body fixedSize">
@@ -188,88 +282,8 @@ var EmployeePage = React.createClass({
                                     <p>{this.state.employee.website}</p>
                                 </div>
                             </a>
-                        </li>
-                        <li className="table-view-cell media">
-                            <a target="_blank" href={this.state.employee.website} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Website
-                                    <p>{this.state.employee.website}</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li className="table-view-cell media">
-                            <a target="_blank" href={this.state.employee.website} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Website
-                                    <p>{this.state.employee.website}</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li className="table-view-cell media">
-                            <a target="_blank" href={this.state.employee.website} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Website
-                                    <p>{this.state.employee.website}</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li className="table-view-cell media">
-                            <a target="_blank" href={this.state.employee.website} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Website
-                                    <p>{this.state.employee.website}</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li className="table-view-cell media">
-                            <a target="_blank" href={this.state.employee.website} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Website
-                                    <p>{this.state.employee.website}</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li className="table-view-cell media">
-                            <a target="_blank" href={this.state.employee.website} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Website
-                                    <p>{this.state.employee.website}</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li className="table-view-cell media">
-                            <a target="_blank" href={this.state.employee.website} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Website
-                                    <p>{this.state.employee.website}</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li className="table-view-cell media">
-                            <a target="_blank" href={this.state.employee.website} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Website
-                                    <p>{this.state.employee.website}</p>
-                                </div>
-                            </a>
-                        </li>
-                        <li className="table-view-cell media">
-                            <a target="_blank" href={this.state.employee.website} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Website
-                                    <p>{this.state.employee.website}</p>
-                                </div>
-                            </a>
-                        </li>
+                        </div>
+
 
 
 
@@ -282,11 +296,11 @@ var EmployeePage = React.createClass({
 
                         
 
-                           <li className="table-view-cell">
+                           <div className="table-view-cell">
                             
                         <iframe className="gmapStyle col-xs-12" src={"https://google.com/maps/embed/v1/place?q="+ this.state.employee.coordinates + "&zoom=17&key=AIzaSyATVILoS8l9ARp2SS2wOViA8xUp2tAMx4A"}></iframe>
 
-                        </li>
+                        </div>
                         
 
 
@@ -297,7 +311,7 @@ var EmployeePage = React.createClass({
                         
                        
                        
-                    </ul>
+                  
                 </div>
             </div>
         );
