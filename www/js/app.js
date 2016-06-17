@@ -13,12 +13,15 @@ var Header = React.createClass({
 
 var SearchBar = React.createClass({
     searchHandler: function() {
-        this.props.searchHandler(this.refs.searchKey.getDOMNode().value, this.props.category);
+        var searchVal = this.refs.searchKey.getDOMNode().value;
+        this.props.searchHandler(searchVal, this.props.category);
+        this.props.searchKey.value = searchVal;
+       // this.props.searchHandler(, this.props.category);
     },
     render: function () {
         return (
             <div className="bar bar-standard bar-header-secondary">
-                <input type="search" ref="searchKey" onChange={this.searchHandler} value={this.props.searchKey}/>
+                <input type="search" ref="searchKey" onChange={this.searchHandler}/>
             </div>
 
         );
@@ -86,13 +89,14 @@ var HomePage = React.createClass({
     },
    
     componentDidMount: function() {
+        
         employeeService.getCategories().done(function(result) {
             this.setState({categories: result});
         }.bind(this));
     },
     render: function () {
 
-
+        
         return (
 <div className={"page " + this.props.position}>
 <Header text="Title" back="false"/>
@@ -170,6 +174,112 @@ var EmployeePage = React.createClass({
                                 </div>
                             </a>
                         </li>
+
+
+
+
+
+
+                        <li className="table-view-cell media">
+                            <a target="_blank" href={this.state.employee.website} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Website
+                                    <p>{this.state.employee.website}</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li className="table-view-cell media">
+                            <a target="_blank" href={this.state.employee.website} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Website
+                                    <p>{this.state.employee.website}</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li className="table-view-cell media">
+                            <a target="_blank" href={this.state.employee.website} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Website
+                                    <p>{this.state.employee.website}</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li className="table-view-cell media">
+                            <a target="_blank" href={this.state.employee.website} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Website
+                                    <p>{this.state.employee.website}</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li className="table-view-cell media">
+                            <a target="_blank" href={this.state.employee.website} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Website
+                                    <p>{this.state.employee.website}</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li className="table-view-cell media">
+                            <a target="_blank" href={this.state.employee.website} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Website
+                                    <p>{this.state.employee.website}</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li className="table-view-cell media">
+                            <a target="_blank" href={this.state.employee.website} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Website
+                                    <p>{this.state.employee.website}</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li className="table-view-cell media">
+                            <a target="_blank" href={this.state.employee.website} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Website
+                                    <p>{this.state.employee.website}</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li className="table-view-cell media">
+                            <a target="_blank" href={this.state.employee.website} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Website
+                                    <p>{this.state.employee.website}</p>
+                                </div>
+                            </a>
+                        </li>
+                        <li className="table-view-cell media">
+                            <a target="_blank" href={this.state.employee.website} className="push-right">
+                                <span className="media-object pull-left icon icon-call"></span>
+                                <div className="media-body fixedSize">
+                                Website
+                                    <p>{this.state.employee.website}</p>
+                                </div>
+                            </a>
+                        </li>
+
+
+
+
+
+
+
+
+
+
                         
 
                            <li className="table-view-cell">
@@ -195,9 +305,9 @@ var EmployeePage = React.createClass({
 });
 var BusinessList =  React.createClass({
    
-   
+     
     render: function () {
-        
+       
         return (
             <div className={"page " + this.props.position}>
                 <Header text={this.props.category} back="true"/>
@@ -230,11 +340,13 @@ var App = React.createClass({
     },
     componentDidMount: function() {
         router.addRoute('', function() {
-            this.slidePage(<HomePage key="list" />);
+            this.state.searchKey = ''; // reset search
+            this.slidePage(<HomePage  key="list" />);
         }.bind(this));
 
         router.addRoute('business/:category', function(category) {
-            this.searchHandler('', category);
+            this.searchHistoy = this.state.searchKey || '';
+            this.searchHandler(this.searchHistoy, category);
             this.slidePage(<BusinessList key="listing" searchHandler={this.searchHandler} searchKey={this.state.searchKey} employees={this.state.employees} category={category}/>);
         }.bind(this));
         router.addRoute('businessPage/:id', function(id) {
