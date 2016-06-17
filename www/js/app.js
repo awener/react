@@ -12,16 +12,20 @@ var Header = React.createClass({
 });
 
 var SearchBar = React.createClass({
+   
     searchHandler: function() {
         var searchVal = this.refs.searchKey.getDOMNode().value;
         this.props.searchHandler(searchVal, this.props.category);
-        this.props.searchKey.value = searchVal;
-       // this.props.searchHandler(, this.props.category);
+       
+       
+       
     },
+
     render: function () {
+      
         return (
             <div className="bar bar-standard bar-header-secondary">
-                <input type="search" ref="searchKey" onChange={this.searchHandler}/>
+                <input type="search" ref="searchKey" onChange={this.searchHandler}  defaultValue={this.props.searchKey}/>
             </div>
 
         );
@@ -169,98 +173,6 @@ var EmployeePage = React.createClass({
 
 
 
-                        <div className="table-view-cell media">
-                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Call
-                                    <p>{this.state.employee.officePhone}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div className="table-view-cell media">
-                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Call
-                                    <p>{this.state.employee.officePhone}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div className="table-view-cell media">
-                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Call
-                                    <p>{this.state.employee.officePhone}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div className="table-view-cell media">
-                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Call
-                                    <p>{this.state.employee.officePhone}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div className="table-view-cell media">
-                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Call
-                                    <p>{this.state.employee.officePhone}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div className="table-view-cell media">
-                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Call
-                                    <p>{this.state.employee.officePhone}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div className="table-view-cell media">
-                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Call
-                                    <p>{this.state.employee.officePhone}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div className="table-view-cell media">
-                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Call
-                                    <p>{this.state.employee.officePhone}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div className="table-view-cell media">
-                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Call
-                                    <p>{this.state.employee.officePhone}</p>
-                                </div>
-                            </a>
-                        </div>
-                        <div className="table-view-cell media">
-                            <a href={"tel:" + this.state.employee.officePhone} className="push-right">
-                                <span className="media-object pull-left icon icon-call"></span>
-                                <div className="media-body fixedSize">
-                                Call
-                                    <p>{this.state.employee.officePhone}</p>
-                                </div>
-                            </a>
-                        </div>
-
-
 
 
 
@@ -321,7 +233,7 @@ var BusinessList =  React.createClass({
    
      
     render: function () {
-       
+      
         return (
             <div className={"page " + this.props.position}>
                 <Header text={this.props.category} back="true"/>
@@ -359,6 +271,7 @@ var App = React.createClass({
         }.bind(this));
 
         router.addRoute('business/:category', function(category) {
+
             this.searchHistoy = this.state.searchKey || '';
             this.searchHandler(this.searchHistoy, category);
             this.slidePage(<BusinessList key="listing" searchHandler={this.searchHandler} searchKey={this.state.searchKey} employees={this.state.employees} category={category}/>);
